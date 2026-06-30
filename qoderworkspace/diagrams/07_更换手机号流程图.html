@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更换手机号流程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #344054;
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>更换手机号流程</h1>
+        <div class="subtitle">Change Phone Number Flow</div>
+        <svg viewBox="0 0 800 950" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 0.5 L 9 5 L 0 9.5 z" fill="#6c757d"/>
+                </marker>
+                <filter id="shadow" x="-8%" y="-8%" width="120%" height="130%">
+                    <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.10"/>
+                </filter>
+            </defs>
+            <rect x="275.0" y="22.0" width="250" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="50" text-anchor="middle" fill="white" font-size="15" font-weight="bold">进入个人账户·更换手机号</text>
+            <rect x="240.0" y="122.0" width="320" height="56" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="146.0" text-anchor="middle" fill="#344054" font-size="13">输入原绑定手机号，获取短信验证码</text>
+            <text x="400" y="164.0" text-anchor="middle" fill="#344054" font-size="13">（Redis 存储，5分钟有效）</text>
+            <polygon points="400,240.0 500.0,290 400,340.0 300.0,290" fill="#fef3cd" stroke="#f0c000" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="295" text-anchor="middle" fill="#344054" font-size="13">校验验证码是否有效</text>
+            <rect x="65.0" y="264.0" width="170" height="52" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="150" y="286.0" text-anchor="middle" fill="#344054" font-size="13">提示验证码错误</text>
+            <text x="150" y="304.0" text-anchor="middle" fill="#344054" font-size="13">重新获取</text>
+            <rect x="260.0" y="402.0" width="280" height="56" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="426.0" text-anchor="middle" fill="#344054" font-size="13">输入新手机号</text>
+            <text x="400" y="444.0" text-anchor="middle" fill="#344054" font-size="13">再次获取新号码验证码</text>
+            <polygon points="400,520.0 500.0,570 400,620.0 300.0,570" fill="#fef3cd" stroke="#f0c000" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="575" text-anchor="middle" fill="#344054" font-size="13">校验新手机号验证码</text>
+            <rect x="270.0" y="682.0" width="260" height="56" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="706.0" text-anchor="middle" fill="#344054" font-size="13">事务更新数据库</text>
+            <text x="400" y="724.0" text-anchor="middle" fill="#344054" font-size="13">医生绑定手机号</text>
+            <rect x="285.0" y="786.0" width="230" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="815" text-anchor="middle" fill="#344054" font-size="14">提示手机号更换完成</text>
+            <rect x="320.0" y="877.0" width="160" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="905" text-anchor="middle" fill="white" font-size="15" font-weight="bold">流程结束</text>
+            <path d="M 400,68 L 400,122" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,180 L 400,240" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 300,290 L 235,290" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="268" y="270" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">验证码失效/错误</text>
+            <path d="M 65,290 L 35,290 L 35,150 L 240,150" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,340 L 400,402" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="412" y="371.0" text-anchor="start" fill="#e74c3c" font-size="12" font-weight="bold">验证通过</text>
+            <path d="M 400,458 L 400,520" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 300,570 L 60,570 L 60,430 L 260,430" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="180" y="550" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">验证失败</text>
+            <path d="M 400,620 L 400,682" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="412" y="651.0" text-anchor="start" fill="#e74c3c" font-size="12" font-weight="bold">验证成功</text>
+            <path d="M 400,738 L 400,786" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,834 L 400,877" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+        </svg>
+    </div>
+</body>
+</html>

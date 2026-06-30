@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智慧医养大数据公共服务平台医生服务系统 - 系统架构图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: #f0f2f5;
+    color: #344054;
+    padding: 40px 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .diagram-container {
+    width: 1200px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+    padding: 48px 48px 40px;
+    border: 1px solid #e4e7ec;
+  }
+  .diagram-title {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #101828;
+    letter-spacing: 1px;
+  }
+  .diagram-subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 13px;
+    color: #667085;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  /* Layer styles */
+  .layer {
+    position: relative;
+    margin-bottom: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e4e7ec;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .layer-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+  }
+  .layer-header .layer-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .layer-header .layer-tag {
+    font-size: 11px;
+    font-weight: 500;
+    background: rgba(255,255,255,0.22);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    letter-spacing: 0;
+  }
+  .layer-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  /* Color themes per layer */
+  .layer-client .layer-header { background: linear-gradient(135deg, #1a73e8 0%, #4a90e2 100%); }
+  .layer-gateway .layer-header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
+  .layer-backend .layer-header { background: linear-gradient(135deg, #1a73e8 0%, #3b82f6 100%); }
+  .layer-data .layer-header { background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%); }
+  .layer-infra .layer-header { background: linear-gradient(135deg, #475467 0%, #667085 100%); }
+
+  .layer-client { border-color: #bdd5f5; }
+  .layer-gateway { border-color: #a7d8d0; }
+  .layer-backend { border-color: #bdd5f5; }
+  .layer-data { border-color: #c4b5fd; }
+  .layer-infra { border-color: #d0d5dd; }
+
+  /* Component boxes */
+  .comp {
+    background: #f8f9fa;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #344054;
+    flex: 1;
+    min-width: 220px;
+    transition: box-shadow 0.2s;
+  }
+  .comp:hover {
+    box-shadow: 0 2px 8px rgba(26,115,232,0.10);
+  }
+  .comp-title {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #101828;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .comp-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .dot-blue { background: #1a73e8; }
+  .dot-green { background: #0d9488; }
+  .dot-purple { background: #7c3aed; }
+  .dot-gray { background: #667085; }
+  .dot-orange { background: #ea580c; }
+
+  .comp ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .comp ul li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 3px;
+    font-size: 12.5px;
+    color: #475467;
+  }
+  .comp ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #d0d5dd;
+  }
+
+  /* Sub-sections inside backend */
+  .backend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+  }
+  .backend-section {
+    background: #f8f9fa;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 16px 18px;
+    border-top: 3px solid #1a73e8;
+  }
+  .backend-section .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a73e8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .backend-section .section-label .badge {
+    background: #e8f0fe;
+    color: #1a73e8;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* Arrow connector between layers */
+  .arrow-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0;
+    position: relative;
+  }
+  .arrow-connector svg {
+    display: block;
+  }
+
+  /* Full width comp */
+  .comp-full {
+    flex-basis: 100%;
+    min-width: 100%;
+  }
+
+  /* Two column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* Infra grid */
+  .infra-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    width: 100%;
+  }
+  .infra-item {
+    background: #f8f9fa;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 12.5px;
+    color: #475467;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .infra-item .infra-icon {
+    width: 36px;
+    height: 36px;
+    background: #f2f4f7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+  .infra-item strong {
+    color: #101828;
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .diagram-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11px;
+    color: #98a2b3;
+    border-top: 1px solid #f2f4f7;
+    padding-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="diagram-container">
+
+  <!-- Title -->
+  <div class="diagram-title">智慧医养大数据公共服务平台医生服务系统</div>
+  <div class="diagram-subtitle">System Architecture Diagram &nbsp;|&nbsp; 系统架构分层图 &nbsp;|&nbsp; v1.0</div>
+
+  <!-- Layer 1: Client Layer -->
+  <div class="layer layer-client">
+    <div class="layer-header">
+      <span class="layer-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </span>
+      客户端层 Client Layer
+      <span class="layer-tag">用户入口</span>
+    </div>
+    <div class="layer-body">
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-blue"></span>医生用户</div>
+        <ul>
+          <li>浏览器访问（Chrome / Edge / Firefox）</li>
+          <li>移动端 APP（iOS / Android）</li>
+          <li>响应式布局自适应</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-blue"></span>Vue3 前端应用</div>
+        <ul>
+          <li>ElementPlus 页面组件库</li>
+          <li>Axios 请求封装与拦截器</li>
+          <li>ECharts 工作台图表渲染</li>
+          <li>Vue Router 路由守卫</li>
+          <li>Pinia 状态管理</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 1 -->
+  <div class="arrow-connector">
+    <svg width="200" height="40" viewBox="0 0 200 40">
+      <defs>
+        <marker id="arrowDown1" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/>
+        </marker>
+      </defs>
+      <line x1="70" y1="2" x2="70" y2="36" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowDown1)" stroke-dasharray="4,3"/>
+      <line x1="100" y1="2" x2="100" y2="36" stroke="#1a73e8" stroke-width="2.5" marker-end="url(#arrowDown1)"/>
+      <line x1="130" y1="2" x2="130" y2="36" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowDown1)" stroke-dasharray="4,3"/>
+      <text x="160" y="24" font-size="10" fill="#98a2b3" font-family="Microsoft YaHei, sans-serif">HTTP(S)</text>
+    </svg>
+  </div>
+
+  <!-- Layer 2: Gateway Layer -->
+  <div class="layer layer-gateway">
+    <div class="layer-header">
+      <span class="layer-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      网关层 Gateway Layer
+      <span class="layer-tag">安全与路由</span>
+    </div>
+    <div class="layer-body">
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-green"></span>Nginx 反向代理</div>
+        <ul>
+          <li>请求转发与负载均衡</li>
+          <li>静态资源托管与 Gzip 压缩</li>
+          <li>跨域 CORS 配置</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-green"></span>HTTPS 加密通信</div>
+        <ul>
+          <li>SSL/TLS 证书配置</li>
+          <li>数据传输加密保障</li>
+          <li>HTTP 强制跳转 HTTPS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 2 -->
+  <div class="arrow-connector">
+    <svg width="200" height="40" viewBox="0 0 200 40">
+      <defs>
+        <marker id="arrowDown2" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0d9488"/>
+        </marker>
+      </defs>
+      <line x1="70" y1="2" x2="70" y2="36" stroke="#0d9488" stroke-width="2" marker-end="url(#arrowDown2)" stroke-dasharray="4,3"/>
+      <line x1="100" y1="2" x2="100" y2="36" stroke="#0d9488" stroke-width="2.5" marker-end="url(#arrowDown2)"/>
+      <line x1="130" y1="2" x2="130" y2="36" stroke="#0d9488" stroke-width="2" marker-end="url(#arrowDown2)" stroke-dasharray="4,3"/>
+      <text x="155" y="24" font-size="10" fill="#98a2b3" font-family="Microsoft YaHei, sans-serif">转发请求</text>
+    </svg>
+  </div>
+
+  <!-- Layer 3: Backend Services -->
+  <div class="layer layer-backend">
+    <div class="layer-header">
+      <span class="layer-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+      </span>
+      SpringBoot 后端服务 Backend Services
+      <span class="layer-tag">核心业务</span>
+    </div>
+    <div class="layer-body" style="padding: 20px 24px 24px;">
+      <div class="backend-grid">
+
+        <!-- Controller Layer -->
+        <div class="backend-section">
+          <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Controller 表现层
+          </div>
+          <div style="margin-bottom: 10px;">
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:4px;">AccountController</div>
+            <div style="font-size:11.5px; color:#667085; line-height:1.5;">个人账户相关接口：登录、注册、密码修改、短信发送</div>
+          </div>
+          <div>
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:4px;">ElderArchiveController</div>
+            <div style="font-size:11.5px; color:#667085; line-height:1.5;">健康档案接口：档案CRUD、体检记录、分页查询</div>
+          </div>
+        </div>
+
+        <!-- Service Layer -->
+        <div class="backend-section">
+          <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            Service 业务逻辑层
+          </div>
+          <div style="margin-bottom: 10px;">
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:4px;">AccountService</div>
+            <div style="font-size:11.5px; color:#667085; line-height:1.5;">密码校验、短信验证码处理、工作台数据统计汇总</div>
+          </div>
+          <div>
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:4px;">ElderArchiveService</div>
+            <div style="font-size:11.5px; color:#667085; line-height:1.5;">档案新增与编辑、分页查询组装、体检数据关联</div>
+          </div>
+        </div>
+
+        <!-- Mapper Layer -->
+        <div class="backend-section">
+          <div class="section-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            Mapper 数据访问层
+            <span class="badge">MyBatis-Plus</span>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:3px;">AccountMapper</div>
+            <div style="font-size:11.5px; color:#667085;">医生账户表数据操作</div>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:3px;">ElderArchiveMapper</div>
+            <div style="font-size:11.5px; color:#667085;">老人档案主表数据操作</div>
+          </div>
+          <div>
+            <div style="font-weight:600; font-size:12.5px; color:#101828; margin-bottom:3px;">ElderPhysicalMapper</div>
+            <div style="font-size:11.5px; color:#667085;">体检记录子表数据操作</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 3 -->
+  <div class="arrow-connector">
+    <svg width="260" height="40" viewBox="0 0 260 40">
+      <defs>
+        <marker id="arrowDown3" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#7c3aed"/>
+        </marker>
+        <marker id="arrowUp3" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0, 8 3, 0 6" fill="#7c3aed"/>
+        </marker>
+      </defs>
+      <line x1="90" y1="2" x2="90" y2="36" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowDown3)" stroke-dasharray="4,3"/>
+      <line x1="120" y1="36" x2="120" y2="2" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowDown3)" stroke-dasharray="4,3"/>
+      <line x1="150" y1="2" x2="150" y2="36" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrowDown3)"/>
+      <line x1="180" y1="36" x2="180" y2="2" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrowDown3)" stroke-dasharray="4,3"/>
+      <text x="200" y="16" font-size="10" fill="#98a2b3" font-family="Microsoft YaHei, sans-serif">SQL / Cache</text>
+      <text x="200" y="30" font-size="10" fill="#98a2b3" font-family="Microsoft YaHei, sans-serif">读写操作</text>
+    </svg>
+  </div>
+
+  <!-- Layer 4: Data Layer -->
+  <div class="layer layer-data">
+    <div class="layer-header">
+      <span class="layer-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </span>
+      数据存储层 Data Layer
+      <span class="layer-tag">持久化存储</span>
+    </div>
+    <div class="layer-body">
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-purple"></span>MySQL 8.0 关系型数据库</div>
+        <ul>
+          <li><strong>doctor_account</strong> — 医生账户表（账号、密码哈希、手机号、角色）</li>
+          <li><strong>elder_archive</strong> — 老人档案主表（姓名、年龄、病史、关联医生）</li>
+          <li><strong>elder_physical_record</strong> — 体检记录子表（血压、血糖、心率、时间）</li>
+          <li><strong>health_warning</strong> — 健康预警表（异常指标、预警等级、处理状态）</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <div class="comp-title"><span class="dot dot-orange"></span>Redis 6.2 高速缓存</div>
+        <ul>
+          <li><strong>短信验证码缓存</strong> — TTL 5分钟自动过期，防刷控制</li>
+          <li><strong>工作台统计数据缓存</strong> — 档案总数、今日新增、预警计数</li>
+          <li><strong>用户会话信息</strong> — Token 存储与黑名单管理</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrow 4 -->
+  <div class="arrow-connector">
+    <svg width="200" height="40" viewBox="0 0 200 40">
+      <defs>
+        <marker id="arrowDown4" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#667085"/>
+        </marker>
+      </defs>
+      <line x1="70" y1="2" x2="70" y2="36" stroke="#667085" stroke-width="2" marker-end="url(#arrowDown4)" stroke-dasharray="4,3"/>
+      <line x1="100" y1="2" x2="100" y2="36" stroke="#667085" stroke-width="2.5" marker-end="url(#arrowDown4)"/>
+      <line x1="130" y1="2" x2="130" y2="36" stroke="#667085" stroke-width="2" marker-end="url(#arrowDown4)" stroke-dasharray="4,3"/>
+      <text x="155" y="24" font-size="10" fill="#98a2b3" font-family="Microsoft YaHei, sans-serif">配置与支撑</text>
+    </svg>
+  </div>
+
+  <!-- Layer 5: Infrastructure -->
+  <div class="layer layer-infra">
+    <div class="layer-header">
+      <span class="layer-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </span>
+      基础设施层 Infrastructure
+      <span class="layer-tag">配置与工具</span>
+    </div>
+    <div class="layer-body">
+      <div class="infra-grid">
+        <div class="infra-item">
+          <div class="infra-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <strong>application.yml</strong>
+          <span>全局配置文件</span>
+          <span style="font-size:11px; color:#98a2b3;">数据源、端口、日志级别</span>
+        </div>
+        <div class="infra-item">
+          <div class="infra-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <strong>CacheTask 定时任务</strong>
+          <span>验证码定时清理</span>
+          <span style="font-size:11px; color:#98a2b3;">统计缓存预热刷新</span>
+        </div>
+        <div class="infra-item">
+          <div class="infra-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <strong>安全与工具类</strong>
+          <span>BCrypt 加密工具</span>
+          <span style="font-size:11px; color:#98a2b3;">RedisTemplate 操作封装</span>
+        </div>
+        <div class="infra-item">
+          <div class="infra-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <strong>全局异常处理器</strong>
+          <span>统一错误响应格式</span>
+          <span style="font-size:11px; color:#98a2b3;">PageHelper 分页工具</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="diagram-footer">
+    智慧医养大数据公共服务平台 &middot; 医生服务系统架构设计 &middot; SpringBoot + Vue3 + MySQL + Redis &middot; 2025
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧医养医生服务系统 - 业务用例图</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Helvetica Neue', sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .diagram-wrapper {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+            padding: 28px 32px 20px;
+            display: inline-block;
+        }
+        svg text {
+            font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body>
+<div class="diagram-wrapper">
+<svg width="1200" height="840" viewBox="0 0 1200 840" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Drop shadow filter for system boundary -->
+        <filter id="shadowSys" x="-2%" y="-2%" width="104%" height="104%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1a73e8" flood-opacity="0.08"/>
+        </filter>
+        <!-- Drop shadow for use case ellipses -->
+        <filter id="shadowUC" x="-8%" y="-12%" width="116%" height="130%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2.5" flood-color="#1a73e8" flood-opacity="0.10"/>
+        </filter>
+        <!-- Gradient for system boundary header -->
+        <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a73e8"/>
+            <stop offset="100%" stop-color="#4a90d9"/>
+        </linearGradient>
+        <!-- Gradient for group headers -->
+        <linearGradient id="groupGrad1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a73e8" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#1a73e8" stop-opacity="0.03"/>
+        </linearGradient>
+        <linearGradient id="groupGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#0d904f" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#0d904f" stop-opacity="0.03"/>
+        </linearGradient>
+        <!-- Use case ellipse gradient -->
+        <linearGradient id="ucGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0f6ff"/>
+            <stop offset="100%" stop-color="#e0ecfa"/>
+        </linearGradient>
+        <!-- Arrowhead marker (open) for primary associations -->
+        <marker id="arrowOpen" viewBox="0 0 12 8" refX="11" refY="4"
+                markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 11 4 L 0 8" fill="none" stroke="#5f6368" stroke-width="1.2"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+        </marker>
+        <!-- Arrowhead marker (open, dashed style) for secondary associations -->
+        <marker id="arrowDash" viewBox="0 0 12 8" refX="11" refY="4"
+                markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 11 4 L 0 8" fill="none" stroke="#8c9399" stroke-width="1.2"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+        </marker>
+    </defs>
+
+    <!-- ============================================ -->
+    <!-- LAYER 1: SYSTEM BOUNDARY                     -->
+    <!-- ============================================ -->
+    <g id="system-boundary">
+        <!-- Main boundary rectangle -->
+        <rect x="228" y="50" width="718" height="750" rx="6" ry="6"
+              fill="#fafcfe" stroke="#1a73e8" stroke-width="2.2" filter="url(#shadowSys)"/>
+        <!-- Header bar -->
+        <rect x="228" y="50" width="718" height="42" rx="6" ry="6" fill="url(#headerGrad)"/>
+        <rect x="228" y="72" width="718" height="20" fill="url(#headerGrad)"/>
+        <!-- System name -->
+        <text x="587" y="78" text-anchor="middle" font-size="16" font-weight="700"
+              fill="#ffffff" letter-spacing="2">智慧医养医生服务系统</text>
+    </g>
+
+    <!-- ============================================ -->
+    <!-- LAYER 2: GROUP RECTANGLES                    -->
+    <!-- ============================================ -->
+    <g id="group-boundaries">
+        <!-- Group 1: 老年人健康档案管理 -->
+        <rect x="252" y="110" width="672" height="320" rx="5" ry="5"
+              fill="url(#groupGrad1)" stroke="#94b8e8" stroke-width="1" stroke-dasharray="6,3"/>
+        <rect x="252" y="110" width="672" height="30" rx="5" ry="5" fill="#1a73e8" fill-opacity="0.07"/>
+        <rect x="252" y="130" width="672" height="10" fill="#1a73e8" fill-opacity="0.07"/>
+        <text x="588" y="132" text-anchor="middle" font-size="13" font-weight="600"
+              fill="#1a73e8" letter-spacing="1">老年人健康档案管理</text>
+
+        <!-- Group 2: 个人账户管理 -->
+        <rect x="252" y="460" width="672" height="288" rx="5" ry="5"
+              fill="url(#groupGrad2)" stroke="#7ab89a" stroke-width="1" stroke-dasharray="6,3"/>
+        <rect x="252" y="460" width="672" height="30" rx="5" ry="5" fill="#0d904f" fill-opacity="0.07"/>
+        <rect x="252" y="480" width="672" height="10" fill="#0d904f" fill-opacity="0.07"/>
+        <text x="588" y="482" text-anchor="middle" font-size="13" font-weight="600"
+              fill="#0d904f" letter-spacing="1">个人账户管理</text>
+    </g>
+
+    <!-- ============================================ -->
+    <!-- LAYER 3: ASSOCIATION LINES                   -->
+    <!-- ============================================ -->
+
+    <!-- Doctor to use cases (solid lines with open arrowheads) -->
+    <g id="doctor-associations" stroke="#5f6368" stroke-width="1.3" fill="none" stroke-linecap="round">
+        <!-- Doctor (115, 425 body center) → 新增老年人健康档案 (580, 192) -->
+        <line x1="140" y1="410" x2="450" y2="197" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 多条件分页查询老人档案 (580, 272) -->
+        <line x1="140" y1="415" x2="450" y2="276" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 编辑老人档案信息 (580, 352) -->
+        <line x1="140" y1="422" x2="450" y2="355" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 查询档案详情 (580, 425) -->
+        <line x1="140" y1="428" x2="450" y2="425" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 修改登录密码 (580, 538) -->
+        <line x1="140" y1="440" x2="450" y2="540" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 更换绑定手机号 (580, 618) -->
+        <line x1="140" y1="445" x2="440" y2="618" marker-end="url(#arrowOpen)"/>
+        <!-- Doctor → 查看工作台统计数据 (580, 698) -->
+        <line x1="140" y1="448" x2="440" y2="697" marker-end="url(#arrowOpen)"/>
+    </g>
+
+    <!-- Secondary actor associations (dashed lines with open arrowheads) -->
+    <g id="secondary-associations" stroke="#8c9399" stroke-width="1.2" fill="none"
+       stroke-dasharray="7,4" stroke-linecap="round">
+        <!-- 系统定时调度器 (1058, 160) → 查看工作台统计数据 (710, 698) -->
+        <line x1="1032" y1="172" x2="718" y2="695" marker-end="url(#arrowDash)"/>
+        <!-- MySQL数据库 (1058, 345) → 多条件分页查询老人档案 (710, 272) -->
+        <line x1="1032" y1="350" x2="718" y2="275" marker-end="url(#arrowDash)"/>
+        <!-- Redis缓存 (1058, 525) → 查询档案详情 (710, 425) -->
+        <line x1="1032" y1="528" x2="718" y2="427" marker-end="url(#arrowDash)"/>
+        <!-- 短信服务接口 (1058, 700) → 更换绑定手机号 (710, 618) -->
+        <line x1="1032" y1="698" x2="718" y2="620" marker-end="url(#arrowDash)"/>
+    </g>
+
+    <!-- ============================================ -->
+    <!-- LAYER 4: USE CASE ELLIPSES                   -->
+    <!-- ============================================ -->
+    <g id="use-cases">
+        <!-- Group 1 use cases -->
+        <!-- UC1: 新增老年人健康档案 -->
+        <ellipse cx="580" cy="192" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="197" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">新增老年人健康档案</text>
+
+        <!-- UC2: 多条件分页查询老人档案 -->
+        <ellipse cx="580" cy="272" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="277" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">多条件分页查询老人档案</text>
+
+        <!-- UC3: 编辑老人档案信息 -->
+        <ellipse cx="580" cy="352" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="357" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">编辑老人档案信息</text>
+
+        <!-- UC4: 查询档案详情 -->
+        <ellipse cx="580" cy="425" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="430" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">查询档案详情</text>
+
+        <!-- Group 2 use cases -->
+        <!-- UC5: 修改登录密码 -->
+        <ellipse cx="580" cy="538" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="543" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">修改登录密码</text>
+
+        <!-- UC6: 更换绑定手机号（短信验证码） -->
+        <ellipse cx="580" cy="618" rx="142" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="623" text-anchor="middle" font-size="11.5" fill="#202124"
+              font-weight="500">更换绑定手机号（短信验证码）</text>
+
+        <!-- UC7: 查看工作台统计数据 -->
+        <ellipse cx="580" cy="698" rx="130" ry="28" fill="url(#ucGrad)" stroke="#1a73e8"
+                 stroke-width="1.6" filter="url(#shadowUC)"/>
+        <text x="580" y="703" text-anchor="middle" font-size="12.5" fill="#202124"
+              font-weight="500">查看工作台统计数据</text>
+    </g>
+
+    <!-- ============================================ -->
+    <!-- LAYER 5: ACTOR FIGURES                       -->
+    <!-- ============================================ -->
+
+    <!-- ======= PRIMARY ACTOR: 医生 (Doctor) ======= -->
+    <g id="actor-doctor">
+        <!-- Head -->
+        <circle cx="115" cy="385" r="17" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+        <!-- Body -->
+        <line x1="115" y1="402" x2="115" y2="442" stroke="#1a73e8" stroke-width="2.2"
+              stroke-linecap="round"/>
+        <!-- Arms -->
+        <line x1="88" y1="420" x2="142" y2="420" stroke="#1a73e8" stroke-width="2.2"
+              stroke-linecap="round"/>
+        <!-- Left leg -->
+        <line x1="115" y1="442" x2="93" y2="470" stroke="#1a73e8" stroke-width="2.2"
+              stroke-linecap="round"/>
+        <!-- Right leg -->
+        <line x1="115" y1="442" x2="137" y2="470" stroke="#1a73e8" stroke-width="2.2"
+              stroke-linecap="round"/>
+        <!-- Label -->
+        <text x="115" y="492" text-anchor="middle" font-size="14" font-weight="700"
+              fill="#202124">医生</text>
+        <text x="115" y="508" text-anchor="middle" font-size="10.5" fill="#5f6368"
+              font-style="italic">(Doctor)</text>
+    </g>
+
+    <!-- ======= SECONDARY ACTOR 1: 系统定时调度器 ======= -->
+    <g id="actor-scheduler">
+        <!-- Stereotype label -->
+        <text x="1058" y="118" text-anchor="middle" font-size="9.5" fill="#8c9399"
+              font-style="italic">&lt;&lt;系统服务&gt;&gt;</text>
+        <!-- Head -->
+        <circle cx="1058" cy="138" r="12" fill="#f5f7fa" stroke="#5f6368" stroke-width="1.5"/>
+        <!-- Body -->
+        <line x1="1058" y1="150" x2="1058" y2="178" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Arms -->
+        <line x1="1040" y1="162" x2="1076" y2="162" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Left leg -->
+        <line x1="1058" y1="178" x2="1043" y2="198" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Right leg -->
+        <line x1="1058" y1="178" x2="1073" y2="198" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Label -->
+        <text x="1058" y="217" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">系统定时</text>
+        <text x="1058" y="232" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">调度器</text>
+    </g>
+
+    <!-- ======= SECONDARY ACTOR 2: MySQL 数据库 ======= -->
+    <g id="actor-mysql">
+        <!-- Stereotype label -->
+        <text x="1058" y="303" text-anchor="middle" font-size="9.5" fill="#8c9399"
+              font-style="italic">&lt;&lt;数据存储&gt;&gt;</text>
+        <!-- Head -->
+        <circle cx="1058" cy="323" r="12" fill="#f5f7fa" stroke="#5f6368" stroke-width="1.5"/>
+        <!-- Body -->
+        <line x1="1058" y1="335" x2="1058" y2="363" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Arms -->
+        <line x1="1040" y1="347" x2="1076" y2="347" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Left leg -->
+        <line x1="1058" y1="363" x2="1043" y2="383" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Right leg -->
+        <line x1="1058" y1="363" x2="1073" y2="383" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Label -->
+        <text x="1058" y="402" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">MySQL</text>
+        <text x="1058" y="417" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">数据库</text>
+    </g>
+
+    <!-- ======= SECONDARY ACTOR 3: Redis 缓存 ======= -->
+    <g id="actor-redis">
+        <!-- Stereotype label -->
+        <text x="1058" y="483" text-anchor="middle" font-size="9.5" fill="#8c9399"
+              font-style="italic">&lt;&lt;缓存服务&gt;&gt;</text>
+        <!-- Head -->
+        <circle cx="1058" cy="503" r="12" fill="#f5f7fa" stroke="#5f6368" stroke-width="1.5"/>
+        <!-- Body -->
+        <line x1="1058" y1="515" x2="1058" y2="543" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Arms -->
+        <line x1="1040" y1="527" x2="1076" y2="527" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Left leg -->
+        <line x1="1058" y1="543" x2="1043" y2="563" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Right leg -->
+        <line x1="1058" y1="543" x2="1073" y2="563" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Label -->
+        <text x="1058" y="582" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">Redis</text>
+        <text x="1058" y="597" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">缓存</text>
+    </g>
+
+    <!-- ======= SECONDARY ACTOR 4: 短信服务接口 ======= -->
+    <g id="actor-sms">
+        <!-- Stereotype label -->
+        <text x="1058" y="658" text-anchor="middle" font-size="9.5" fill="#8c9399"
+              font-style="italic">&lt;&lt;外部接口&gt;&gt;</text>
+        <!-- Head -->
+        <circle cx="1058" cy="678" r="12" fill="#f5f7fa" stroke="#5f6368" stroke-width="1.5"/>
+        <!-- Body -->
+        <line x1="1058" y1="690" x2="1058" y2="718" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Arms -->
+        <line x1="1040" y1="702" x2="1076" y2="702" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Left leg -->
+        <line x1="1058" y1="718" x2="1043" y2="738" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Right leg -->
+        <line x1="1058" y1="718" x2="1073" y2="738" stroke="#5f6368" stroke-width="1.6"
+              stroke-linecap="round"/>
+        <!-- Label -->
+        <text x="1058" y="757" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">短信服务</text>
+        <text x="1058" y="772" text-anchor="middle" font-size="11.5" font-weight="600"
+              fill="#3c4043">接口</text>
+    </g>
+
+    <!-- ============================================ -->
+    <!-- LAYER 6: LEGEND                              -->
+    <!-- ============================================ -->
+    <g id="legend" transform="translate(30, 740)">
+        <rect x="0" y="0" width="170" height="72" rx="4" ry="4"
+              fill="#fafcfe" stroke="#d2d6dc" stroke-width="0.8"/>
+        <text x="85" y="16" text-anchor="middle" font-size="10" font-weight="600"
+              fill="#3c4043">图例 (Legend)</text>
+        <!-- Primary association -->
+        <line x1="12" y1="32" x2="52" y2="32" stroke="#5f6368" stroke-width="1.3"
+              marker-end="url(#arrowOpen)"/>
+        <text x="62" y="36" font-size="9.5" fill="#5f6368">主要参与者关联</text>
+        <!-- Secondary association -->
+        <line x1="12" y1="52" x2="52" y2="52" stroke="#8c9399" stroke-width="1.2"
+              stroke-dasharray="7,4" marker-end="url(#arrowDash)"/>
+        <text x="62" y="56" font-size="9.5" fill="#5f6368">辅助系统关联</text>
+    </g>
+
+</svg>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑/查询老人档案流程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #344054;
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>编辑/查询老人档案流程</h1>
+        <div class="subtitle">Edit / Query Elderly Health Record Flow</div>
+        <svg viewBox="0 0 800 1040" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 0.5 L 9 5 L 0 9.5 z" fill="#6c757d"/>
+                </marker>
+                <filter id="shadow" x="-8%" y="-8%" width="120%" height="130%">
+                    <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.10"/>
+                </filter>
+            </defs>
+            <rect x="295.0" y="22.0" width="210" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="50" text-anchor="middle" fill="white" font-size="15" font-weight="bold">进入健康档案列表页</text>
+            <rect x="255.0" y="109.0" width="290" height="52" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="131.0" text-anchor="middle" fill="#344054" font-size="13">输入姓名/身份证号/联系方式</text>
+            <text x="400" y="149.0" text-anchor="middle" fill="#344054" font-size="13">筛选条件</text>
+            <rect x="295.0" y="206.0" width="210" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="235" text-anchor="middle" fill="#344054" font-size="14">提交分页查询请求</text>
+            <rect x="240.0" y="301.0" width="320" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="330" text-anchor="middle" fill="#344054" font-size="14">后端 XML 动态拼接多条件分页检索</text>
+            <rect x="265.0" y="396.0" width="270" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="425" text-anchor="middle" fill="#344054" font-size="14">前端展示分页老人档案列表</text>
+            <rect x="285.0" y="491.0" width="230" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="520" text-anchor="middle" fill="#344054" font-size="14">选择单条档案点击编辑</text>
+            <rect x="265.0" y="586.0" width="270" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="615" text-anchor="middle" fill="#344054" font-size="14">加载该老人原有全部档案信息</text>
+            <rect x="265.0" y="681.0" width="270" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="710" text-anchor="middle" fill="#344054" font-size="14">修改档案基础/病史/体检数据</text>
+            <rect x="285.0" y="776.0" width="230" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="805" text-anchor="middle" fill="#344054" font-size="14">提交修改内容至后端</text>
+            <rect x="245.0" y="871.0" width="310" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="900" text-anchor="middle" fill="#344054" font-size="14">后端事务更新对应档案数据库记录</text>
+            <rect x="265.0" y="967.0" width="270" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="995" text-anchor="middle" fill="white" font-size="15" font-weight="bold">提示编辑成功，刷新档案列表</text>
+            <path d="M 400,68 L 400,109" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,161 L 400,206" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,254 L 400,301" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,349 L 400,396" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,444 L 400,491" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,539 L 400,586" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,634 L 400,681" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,729 L 400,776" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,824 L 400,871" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,919 L 400,967" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+        </svg>
+    </div>
+</body>
+</html>

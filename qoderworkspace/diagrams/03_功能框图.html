@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智慧医养大数据公共服务平台医生服务系统 - 模块功能框图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    background: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .diagram {
+    width: 1200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 48px 40px 56px;
+    position: relative;
+  }
+  .diagram-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2b4a;
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+  .tree { position: relative; }
+
+  /* Root */
+  .root-row { display: flex; justify-content: center; margin-bottom: 0; position: relative; z-index: 2; }
+
+  /* L1 row */
+  .l1-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .l1-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* L2 */
+  .l2-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  /* Boxes */
+  .box {
+    border-radius: 10px;
+    padding: 14px 22px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.12);
+    position: relative;
+    z-index: 2;
+    transition: box-shadow 0.2s;
+  }
+  .box:hover { box-shadow: 0 4px 16px rgba(26,115,232,0.22); }
+
+  .box-root {
+    background: #1a73e8;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(26,115,232,0.25);
+    max-width: 520px;
+  }
+  .box-l1 {
+    background: #4285f4;
+    color: #fff;
+    font-size: 15px;
+    padding: 14px 18px;
+    min-width: 200px;
+    max-width: 280px;
+  }
+  .box-l2 {
+    background: #e8f0fe;
+    color: #1a2b4a;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 16px;
+    min-width: 220px;
+    max-width: 320px;
+    border: 1px solid #c5d8f8;
+  }
+
+  /* SVG overlay */
+  .svg-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<div class="diagram" id="diagram">
+  <div class="diagram-title">智慧医养大数据公共服务平台医生服务系统 — 模块功能框图</div>
+
+  <div class="tree" id="tree">
+    <!-- Root -->
+    <div class="root-row">
+      <div class="box box-root" id="root">智慧医养大数据公共服务平台医生服务</div>
+    </div>
+
+    <!-- SVG connectors drawn by JS -->
+    <svg class="svg-overlay" id="svg"></svg>
+
+    <!-- Level 1 -->
+    <div class="l1-row" id="l1row">
+      <!-- Col 1 -->
+      <div class="l1-col" id="col1">
+        <div class="box box-l1" id="l1-1">个人账户管理模块</div>
+        <div class="l2-list" id="l2-1">
+          <div class="box box-l2">1.1 修改密码功能<br><span style="font-size:12px;color:#5f6368">基于旧密码校验修改登录密码</span></div>
+          <div class="box box-l2">1.2 更换手机号功能<br><span style="font-size:12px;color:#5f6368">短信验证码更换绑定手机号</span></div>
+          <div class="box box-l2">1.3 工作台首页统计功能<br><span style="font-size:12px;color:#5f6368">负责老人数、待处理预警数</span></div>
+        </div>
+      </div>
+      <!-- Col 2 -->
+      <div class="l1-col" id="col2">
+        <div class="box box-l1" id="l1-2">老年人健康档案模块</div>
+        <div class="l2-list" id="l2-2">
+          <div class="box box-l2">2.1 新增老人档案<br><span style="font-size:12px;color:#5f6368">基础信息 + 病史 + 批量体检记录</span></div>
+          <div class="box box-l2">2.2 档案编辑、档案详情查询</div>
+          <div class="box box-l2">2.3 多条件分页检索档案列表</div>
+        </div>
+      </div>
+      <!-- Col 3 -->
+      <div class="l1-col" id="col3">
+        <div class="box box-l1" id="l1-3">底层支撑模块</div>
+        <div class="l2-list" id="l2-3">
+          <div class="box box-l2">3.1 Mapper 与 XML 复杂 SQL 持久层</div>
+          <div class="box box-l2">3.2 Redis 缓存<br><span style="font-size:12px;color:#5f6368">验证码、统计数据</span></div>
+          <div class="box box-l2">3.3 Task 定时任务<br><span style="font-size:12px;color:#5f6368">缓存清理、数据预热</span></div>
+          <div class="box box-l2">3.4 application.yml 全局配置</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function draw() {
+  const svg = document.getElementById('svg');
+  const tree = document.getElementById('tree');
+  const rect = tree.getBoundingClientRect();
+
+  svg.setAttribute('width', rect.width);
+  svg.setAttribute('height', rect.height);
+  svg.innerHTML = '';
+
+  const ns = 'http://www.w3.org/2000/svg';
+
+  function pos(el) {
+    const r = el.getBoundingClientRect();
+    return {
+      cx: r.left + r.width/2 - rect.left,
+      top: r.top - rect.top,
+      bottom: r.bottom - rect.top,
+      left: r.left - rect.left,
+      right: r.right - rect.left,
+      width: r.width,
+      height: r.height
+    };
+  }
+
+  function line(x1,y1,x2,y2,color,width) {
+    const l = document.createElementNS(ns,'line');
+    l.setAttribute('x1',x1); l.setAttribute('y1',y1);
+    l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+    l.setAttribute('stroke',color); l.setAttribute('stroke-width',width||2);
+    svg.appendChild(l);
+  }
+
+  const rootP = pos(document.getElementById('root'));
+  const l1Ids = ['l1-1','l1-2','l1-3'];
+
+  // Root -> L1
+  const rootBot = rootP.bottom;
+  const midY1 = rootBot + 28;
+
+  l1Ids.forEach(id => {
+    const p = pos(document.getElementById(id));
+    const l1Top = p.top;
+    const midY = (rootBot + l1Top) / 2;
+    // vertical from root bottom
+    line(rootP.cx, rootBot, rootP.cx, midY, '#4285f4', 2.5);
+    // horizontal
+    line(rootP.cx, midY, p.cx, midY, '#4285f4', 2.5);
+    // vertical down to L1
+    line(p.cx, midY, p.cx, l1Top, '#4285f4', 2.5);
+  });
+
+  // L1 -> L2
+  const l2Groups = [
+    {parent:'l1-1', items:'l2-1'},
+    {parent:'l1-2', items:'l2-2'},
+    {parent:'l1-3', items:'l2-3'}
+  ];
+
+  l2Groups.forEach(g => {
+    const pp = pos(document.getElementById(g.parent));
+    const container = document.getElementById(g.items);
+    const children = container.querySelectorAll('.box-l2');
+    if(!children.length) return;
+
+    const parentBot = pp.bottom;
+    const firstChild = pos(children[0]);
+    const midY = (parentBot + firstChild.top) / 2;
+
+    // vertical from parent
+    line(pp.cx, parentBot, pp.cx, midY, '#a8c7fa', 2);
+
+    if(children.length === 1) {
+      line(pp.cx, midY, pp.cx, firstChild.top, '#a8c7fa', 2);
+    } else {
+      // horizontal bar spanning all children
+      const first = pos(children[0]);
+      const last = pos(children[children.length-1]);
+      line(first.cx, midY, last.cx, midY, '#a8c7fa', 2);
+
+      children.forEach(c => {
+        const cp = pos(c);
+        line(cp.cx, midY, cp.cx, cp.top, '#a8c7fa', 2);
+      });
+    }
+  });
+}
+
+window.addEventListener('load', draw);
+window.addEventListener('resize', draw);
+</script>
+</body>
+</html>

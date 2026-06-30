@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增老人健康档案流程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #344054;
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>新增老人健康档案流程</h1>
+        <div class="subtitle">New Elderly Health Record Creation Flow</div>
+        <svg viewBox="0 0 800 880" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 0.5 L 9 5 L 0 9.5 z" fill="#6c757d"/>
+                </marker>
+                <filter id="shadow" x="-8%" y="-8%" width="120%" height="130%">
+                    <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.10"/>
+                </filter>
+            </defs>
+            <rect x="265.0" y="22.0" width="270" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="50" text-anchor="middle" fill="white" font-size="15" font-weight="bold">进入老年人健康档案·新增档案</text>
+            <rect x="260.0" y="117.0" width="280" height="56" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="141.0" text-anchor="middle" fill="#344054" font-size="13">录入老人基础信息、病史</text>
+            <text x="400" y="159.0" text-anchor="middle" fill="#344054" font-size="13">过敏史、用药情况</text>
+            <rect x="265.0" y="231.0" width="270" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="260" text-anchor="middle" fill="#344054" font-size="14">前端表单校验必填项完整性</text>
+            <polygon points="400,330.0 490.0,380 400,430.0 310.0,380" fill="#fef3cd" stroke="#f0c000" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="385" text-anchor="middle" fill="#344054" font-size="13">信息是否完整</text>
+            <rect x="75.0" y="354.0" width="160" height="52" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="155" y="376.0" text-anchor="middle" fill="#344054" font-size="13">标红缺失字段</text>
+            <text x="155" y="394.0" text-anchor="middle" fill="#344054" font-size="13">提示补充</text>
+            <rect x="295.0" y="496.0" width="210" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="525" text-anchor="middle" fill="#344054" font-size="14">提交表单至后端</text>
+            <rect x="230.0" y="597.0" width="340" height="56" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="621.0" text-anchor="middle" fill="#344054" font-size="12">后端开启事务：生成唯一档案编号</text>
+            <text x="400" y="639.0" text-anchor="middle" fill="#344054" font-size="12">→ 插入档案主表 → 批量插入体检子表</text>
+            <rect x="275.0" y="706.0" width="250" height="48" rx="5" fill="#e8f0fe" stroke="#b8d4fe" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="400" y="735" text-anchor="middle" fill="#344054" font-size="14">事务提交，清除统计缓存</text>
+            <rect x="255.0" y="807.0" width="290" height="46" rx="23.0" fill="#1a73e8" filter="url(#shadow)"/>
+            <text x="400" y="835" text-anchor="middle" fill="white" font-size="15" font-weight="bold">提示档案创建成功，跳转档案列表</text>
+            <path d="M 400,68 L 400,117" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,173 L 400,231" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,279 L 400,330" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 310,380 L 235,380" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="272" y="372" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">信息缺失</text>
+            <path d="M 75,380 L 40,380 L 40,145 L 260,145" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,430 L 400,496" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <text x="412" y="463.0" text-anchor="start" fill="#e74c3c" font-size="12" font-weight="bold">信息完整</text>
+            <path d="M 400,544 L 400,597" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,653 L 400,706" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+            <path d="M 400,754 L 400,807" stroke="#6c757d" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+        </svg>
+    </div>
+</body>
+</html>
